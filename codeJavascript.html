@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .tabs a.active{
+            color: red;
+        }
+        [class*='container-']{
+            display: none;
+        }
+        [class*='container-'].active{
+            display: block;
+        }
+        .container{
+            display: none;
+        }
+        .container.active{
+            display: block;
+        }
+    </style>
+
+    
+</head>
+<body>
+
+    <div>begin: [33, 103, 3, 726, 200, 984, 198, 764, 9]</div>
+    <div>0: [33,3,103,200,726,198,764,9,984]</div>
+    <div id="list2"></div>
+
+    <details>
+        <summary>abbbbb</summary>
+        show show show show show show show show show 
+    </details>
+    <!-- <div class="tabs">
+        <a href="javascript:;" class="tab-1 active">test1</a>
+        <a href="javascript:;" class="tab-2">test2</a>
+        <a href="javascript:;" class="tab-3">test3</a>
+        <a href="javascript:;" class="tab-4">test4</a>
+    </div>
+    <div class="container-1 active">1Some content</div>
+    <div class="container-2">2Some content</div>
+    <div class="container-3">3Some content</div>
+    <div class="container-4">4Some content</div> -->
+
+    <div class="tabs" id="tabs">
+        <a href="javascript:;" class="tab active">test1</a>
+        <a href="javascript:;" class="tab">test2</a>
+        <a href="javascript:;" class="tab">test3</a>
+        <a href="javascript:;" class="tab">test4</a>
+    </div>
+    <div id="list-view">
+        <div class="container active">1Some content</div>
+        <div class="container">2Some content</div>
+        <div class="container">3Some content</div>
+        <div class="container">4Some content</div>
+    </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+
+        var items = [33, 103, 3, 726, 200, 984, 198, 764, 9];
+
+        
+
+        // function bbSort(item){
+        //     var len = item.length;
+
+        //     for(var i = 0; i < 1; i++){
+        //         for(var j = 0; j < len; j++){
+        //             //Compare the adjacent positions
+        //             if(item[i] < item[j] && i!=j) {
+
+        //                 // console.log('row 1: ' + items[i])
+        //                 // console.log('row 2: ' + items[j])
+        //                 //Swap the numbers
+        //                 tmp = item[j];  //Temporary variable to hold the current number
+        //                 item[j] = item[i]; //Replace current number with adjacent number
+        //                 item[i] = tmp; //Replace adjacent number with current number
+
+        //                 // console.log(tmp)
+        //                 // console.log(items[j])
+        //                 // console.log(items[j+1])
+                        
+        //             }
+        //         }
+        //         // console.log('2:' + items[i])
+        //     }
+
+        //     return item
+        // }
+        function bbSort(item){
+            var len = item.length;
+
+            for(var i = 0; i < 2; i++){
+                console.log(item[i])
+                for(var j = 0; j < (len - i - 1); j++){
+                    //Compare the adjacent positions
+                    console.log('----j1: ' + item[j])
+                    console.log('j2: ' + item[j+1])
+
+                    if(item[j] > item[j+1]) {
+                            //Swap the numbers
+                        var tmp = item[j];  //Temporary variable to hold the current number
+                        item[j] = item[j+1]; //Replace current number with adjacent number
+                        item[j+1] = tmp; //Replace adjacent number with current number
+                    }
+                }
+                // console.log('2:' + items[i])
+            }
+
+            return item
+        }
+        // bbSort(items);
+
+        // document.body.innerHTML = items;
+
+        
+        document.getElementById('list2').innerHTML = bbSort(items);
+
+        var el = document.getElementById('tabs');
+        // var el = document.getElementsByClassName
+        // var el = document.getElementsByName
+        // var el = document.getElementsByTagName
+        // var el = document.getElementsByTagNameNS
+        // var el = document.getSelection
+
+
+        var len = el.children.length;
+
+        for (var i= 0; i < len; i++){
+            
+            (function(idx){
+                // el.children[i].onclick = function(e){
+                el.children[i].addEventListener('click', function(e){
+                    var ll = e.target.parentElement.querySelectorAll( ".active")
+                    var l2 = e.target.parentElement.parentElement.querySelector( "#list-view").querySelectorAll( ".active")
+                    
+                    var l3 = e.target.parentElement.parentElement.querySelector( "#list-view").children
+                    
+                    ll.forEach(m =>{
+                        m.classList.remove("active")
+                    })
+
+                    l2.forEach(k =>{
+                        k.classList.remove("active")
+                    })
+
+                    this.classList.add("active")
+                    l3[idx].classList.add("active")
+
+                })
+            })(i)
+
+            // (function(index){
+            //     g.children[i].onclick = function(){
+            //         alert(index)  ;
+            //     }    
+            // })(i);
+        }
+        // $(function(){
+        //     // $('.tabs a').click(function(){
+                
+        //     //     $(this).addClass('active').siblings().removeClass('active');
+
+        //     //     var nvc = $(this).attr('class').split(' ')[0].slice(-1);
+        //     //     $('.container-' + nvc).addClass('active').siblings().removeClass('active');
+        //     // });
+
+            
+
+        //     $('.tabs .tab').click(function(){
+                
+        //         $(this).addClass('active').siblings().removeClass('active');
+
+        //         var index = $( ".tab" ).index( this ) + 1;             
+        //         $('.container:nth-child(' + index + ')').addClass('active').siblings().removeClass('active');
+        //     })
+        // })
+    
+    </script>
+
+
+    
+
+</body>
+</html>
