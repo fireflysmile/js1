@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>form</title>
+
+    
+</head>
+<body>
+    <form method="POST" name="cForm" onsubmit="return valid()">
+    <!-- <form method="POST" name="cForm"> -->
+        <input type="text" name="userName" placeholder="user name" minlength="5" maxlength="10" required>
+        <div id="demo"></div>
+
+        <select name="age" id="age">
+            <option selected hidden>select</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+        </select>
+        <input type="text" name="userEmail" placeholder="email">
+        <input type="text" name="userPass" placeholder="password">
+        <input type="text" name="userPassConfirm" placeholder="password confirm">
+        <input type="submit" value="submit form">
+        <button onclick="valid()">submit</button>
+    </form>
+
+
+    <script>
+        var formCheck = document.forms['cForm'];
+
+
+        formCheck['userName'].addEventListener('blur', nameVerify, true)
+
+        function nameVerify(){
+            if (!this.checkValidity()){
+                this.style.border = '1px solid red'
+            } else this.style.borderColor = '#ccc'
+        }
+
+        function valid(){
+            // alert('')
+            // userNameCheck.willvalidity
+            // console.log(userNameCheck.validity.customError)
+            // console.log(userNameCheck.validity.patternMismatch)
+            // console.log(userNameCheck.validity.rangeOverflow)
+            // console.log(userNameCheck.validity.rangeUnderflow)
+            // console.log(userNameCheck.validity.stepMismatch)
+            // console.log(userNameCheck.validity.tooLong)
+            // console.log(userNameCheck.validity.typeMismatch)
+            // console.log(userNameCheck.validity.valueMissing)
+            // console.log(userNameCheck.validity.valid)
+
+            // console.log(userNameCheck.checkValidity())
+            // if (userNameCheck.validity.customError){
+                
+            // }
+            // if (!ageCheck.checkValidity()) {
+            //     // userNameCheck.setCustomValidity('Invalid');
+            //     document.getElementById("demo").innerHTML = ageCheck.validationMessage;
+            // } else {
+            //     document.getElementById("demo").innerHTML = "Input OK";
+            // }
+
+            if (formCheck['age'].value == 'select') {
+                // userNameCheck.setCustomValidity('Invalid');
+                document.getElementById("demo").innerHTML = "please select age";
+            } else {
+                document.getElementById("demo").innerHTML = "option OK";
+            } 
+        }
+    </script>
+</body>
+</html>
