@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        body{
+            margin: 0;
+        }
+        .content-grid *{
+            background-color: #ccc;
+            border: 2px solid;
+        }
+        .content-grid{
+            display: grid;
+            height: 100vh;
+            grid-auto-columns: 300px 100px;
+            grid-template-columns: 200px 1fr;
+            grid-template-rows: 50px 30px 1fr 50px;
+            grid-template-areas: 
+                                    "header header header header" 
+                                    "nav nav . ." 
+                                    "aside article article article" 
+                                    "aside footer . .";
+            grid-gap: 10px;
+        }
+
+        header{
+            grid-area: header;
+        }
+        nav{
+            grid-area: nav;
+        }
+        aside{
+            grid-area: aside;
+        }
+        article{
+            grid-area: article;
+        }
+        footer{
+            grid-area: footer;
+            height: 1000px;
+        }
+        article p{
+            /* display: none; */
+        }
+    </style>
+</head>
+<body>
+    <section class="content-grid">
+        <header>header</header>
+        <nav>nav</nav>
+        <aside>aside</aside>
+        <article>
+            <p>article 1</p>
+            <p>article 2</p>
+            <p>article</p>
+            <p>article</p>
+            <p>article</p>
+            <p>article</p>
+            <p>article</p>
+
+            <a href="javascript:;" class="view-more">view more</a>
+        </article>
+        <footer></footer>
+    </section>
+
+    <script>
+        // document.body.addEventListener('click', function(event){
+        //     console.log(event.pageY)
+        //     console.log(event.screenY)
+        //     console.log(event.clientY)
+        // })
+        var el = document.getElementsByTagName('article')[0].querySelectorAll('p');
+        var show = 2;
+       
+        onload = function(){
+            
+            for (var i = 0; i < el.length; i++){
+                el[i].style.display = 'none';
+            }
+
+            for (var i = 0; i < show; i++){
+                el[i].style.display = 'block';
+            }
+            
+        }
+
+        document.getElementsByTagName('header')[0].innerHTML = new Date().getDate();
+
+
+        document.write(new Date().getDate());
+
+
+
+        
+
+        document.getElementsByClassName('view-more')[0].ondblclick = function(event){
+            show+=2;
+
+            if(show > el.length){
+                show = el.length;
+            }
+
+            console.log(show)
+            for (var i = 0; i < show; i++){
+                el[i].style.display = 'block';
+            }
+
+            var gt = document.getElementsByTagName("footer")[0];
+
+
+            gt.scrollIntoView();
+
+        }
+    </script>
+</body>
+</html>

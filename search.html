@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        #tabs{
+            width: 200px;
+            height: 100vh;
+            background-color: #ccc;
+            float: left;
+        }
+        #tabs p{
+            height: 55px;
+            line-height: 55px;
+            background-color: #808000;
+            padding-left: 20px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+        #tabs p.active{
+            background-color: #800000;
+            color: #fff;
+        }
+        #content{
+            width: calc(100% - 200px);
+            background-color: #ddd;
+            height: 100vh;
+            float: left;
+        }
+        #content>div{
+            padding: 40px;
+            font-size: 40px;
+            display: none;
+        }
+        #content>div.active{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="tabs" class="tabs">
+        <p class="active">tab 1</p>
+        <p>tab 2</p>
+        <p>tab 3</p>
+        <p>tab 4</p>
+        <p>tab 5</p>
+    </div>
+    <div id="content">
+        <div class="active">content tab 1</div>
+        <div>content tab 2</div>
+        <div>content tab 3</div>
+        <div>content tab 4</div>
+        <div>content tab 5</div>
+    </div>
+
+    <script>        
+        var tabs = document.getElementById("tabs").children;
+        
+        for(var i=0;i<tabs.length;i++){
+            // (function (i) {
+                // tabs[i].addEventListener("click",function(){
+                tabs[i].onclick = function(){
+                    var tabsActive = this.parentElement.querySelectorAll(".active") // select active tabs
+                    tabsActive.forEach(e => e.classList.remove("active"));
+                    this.classList.add("active");
+
+                    var contentActive = this.parentElement.parentElement.querySelector("#content").querySelectorAll(".active");
+                    contentActive.forEach(e => e.classList.remove("active"));
+
+                    var idx = Array.from(tabs).indexOf(this);
+
+                    // this.nextElementSibling.innerHTML = "text"
+
+                    var contentList = this.parentElement.parentElement.querySelector("#content").children;
+                    contentList[idx].classList.add("active");
+                    
+                }
+            // })
+            
+            // (i);
+        }
+
+
+        
+    </script>
+</body>
+</html>
